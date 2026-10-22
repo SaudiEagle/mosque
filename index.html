@@ -6,13 +6,13 @@
 <title>دراسة موقع المسجد</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: field-survey dossier. Map first as the working surface, numbers beside it, the written report below. */
 :root{
   --bg:#f6f4ef; --surface:#ffffff; --ink:#1f2420; --muted:#5f665f; --line:#dcd8cd;
   --accent:#1f6b4a; --accent-ink:#ffffff; --accent-soft:#e3efe8; --pin:#1f6b4a; --shade:rgba(20,24,20,.55);
-  --display:"Reem Kufi","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --display:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
   --body:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -214,17 +214,18 @@ const TOB="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(
 const spots=[
  {n:1,x:37.1,y:45.2,t:"الأرض المقترحة للمسجد",d:"الأرض من ثلاث جهات مختلفة. محاطة بالبيوت والعماير، والسيارات واقفة حولها.",p:[1,2,3],l:LAND,lt:"افتح الأرض في قوقل ماب ↗"},
  {n:2,x:47.4,y:17.2,t:"شمال الأرض (الخط الأصفر)",d:"شارع سكني شمال الأرض، فيه بيوت مسكونة وسيارات على الجهتين. سكان هالجهة أبعد ناس عن مسجد الطبيشي.",p:[8],m:"map8",l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
- {n:3,x:76.3,y:30.5,t:"الجهة الشمالية الشرقية",d:"عماير مسكونة وسيارات واقفة قدامها، وما فيه أي مسجد في هالجهة.",p:[6,7],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
+ {n:3,x:56.8,y:30,t:"الجهة الشمالية الشرقية",d:"عماير مسكونة وسيارات واقفة قدامها، وما فيه أي مسجد في هالجهة.",p:[6,7],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
  {n:4,x:15.9,y:50.9,t:"مدخل الحي من الدائري الثاني",d:"الوصول للأرض سهل من الدائري الثاني.",p:[4],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
- {n:5,x:63.6,y:64.2,t:"الطريق لمسجد الطبيشي",d:"الطريق اللي يمشيه السكان من جهة الأرض لمسجد الطبيشي، ويأخذ تقريباً 4–5 دقائق مشي.",p:[5],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
- {n:6,x:36,y:66.4,t:"الحي من الجهة الجنوبية",d:"شارع سكني جنوب الأرض، فيه بيوت وسيارات على الجهتين.",p:[16],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
- {n:7,x:49.8,y:77,t:"الشارع الرئيسي اللي يقطعونه",d:"الممر اللي يمشونه سكان الشمال باتجاه الجنوب جنب مسجد الطبيشي، والشارع الرئيسي اللي لازم يقطعونه عشان يوصلون للمسجد.",p:[9,10],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
+ {n:5,x:22.4,y:47.6,t:"الطريق لمسجد الطبيشي",d:"الطريق اللي يمشيه السكان من جهة الأرض لمسجد الطبيشي، ويأخذ تقريباً 4–5 دقائق مشي.",p:[5],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
+ {n:6,hide:1,x:36,y:66.4,t:"الحي من الجهة الجنوبية",d:"شارع سكني جنوب الأرض، فيه بيوت وسيارات على الجهتين.",p:[16],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
+ {n:7,x:35.8,y:87.4,t:"الشارع الرئيسي اللي يقطعونه",d:"الممر اللي يمشونه سكان الشمال باتجاه الجنوب جنب مسجد الطبيشي، والشارع الرئيسي اللي لازم يقطعونه عشان يوصلون للمسجد.",p:[9,10],l:SAT,lt:"افتح المنطقة في قوقل ماب ↗"},
  {n:8,x:42.9,y:95.5,t:"مسجد الطبيشي",d:"أقرب مسجد للأرض. حوالي 6 صفوف، وكان ممتلئ 4 صفوف ونص وقت العشاء، وما يصلي جمعة.",p:[11,12,13,14,15],l:TOB,lt:"افتح مسجد الطبيشي في قوقل ماب ↗"}
 ];
 const box=document.getElementById('mapbox'),list=document.getElementById('list');
 const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
 let last=null;
 spots.forEach(s=>{
+  if(s.hide)return;
   const b=document.createElement('button');
   b.className='pin';b.type='button';b.textContent=s.n;
   b.style.left=s.x+'%';b.style.top=s.y+'%';
@@ -235,7 +236,7 @@ spots.forEach(s=>{
   li.onclick=()=>open(s,li);list.appendChild(li);
 });
 function open(s,from){
-  last=from;spots.forEach(o=>o.pin.setAttribute('aria-pressed',o===s?'true':'false'));
+  last=from;spots.forEach(o=>o.pin&&o.pin.setAttribute('aria-pressed',o===s?'true':'false'));
   document.getElementById('dTitle').textContent=s.t;
   document.getElementById('dText').textContent=s.d;
   const a=document.getElementById('dLink');a.href=s.l;a.textContent=s.lt;
@@ -249,15 +250,15 @@ function shot(src,cap){
   b.innerHTML='<img src="'+src+'" alt="'+cap+'" loading="lazy"><small>'+cap+'</small>';
   b.onclick=()=>zoom(src,cap);return b;
 }
-function closeD(){drawer.hidden=true;scrim.hidden=true;spots.forEach(o=>o.pin.setAttribute('aria-pressed','false'));if(last)last.focus();}
+function closeD(){drawer.hidden=true;scrim.hidden=true;spots.forEach(o=>o.pin&&o.pin.setAttribute('aria-pressed','false'));if(last)last.focus();}
 document.getElementById('close').onclick=closeD;scrim.onclick=closeD;
 const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg');
 function zoom(src,cap){lbImg.src=src;lbImg.alt=cap;lb.hidden=false;}
 lb.onclick=()=>{lb.hidden=true;};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!lb.hidden)lb.hidden=true;else if(!drawer.hidden)closeD();}});
-document.querySelectorAll('.overlay .hit').forEach(el=>{el.addEventListener('click',()=>{const s=spots.find(o=>o.n==el.dataset.s);open(s,s.pin);});});
+document.querySelectorAll('.overlay .hit').forEach(el=>{el.addEventListener('click',()=>{const s=spots.find(o=>o.n==el.dataset.s);open(s,s.pin||el);});});
 const g=document.getElementById('gallery');
-for(let i=1;i<=16;i++){
+for(let i=1;i<=15;i++){
   const b=document.createElement('button');b.type='button';
   b.innerHTML='<img src="img/p'+i+'.jpg" alt="صورة '+i+'" loading="lazy"><small>'+i+'</small>';
   b.onclick=()=>zoom('img/p'+i+'.jpg','صورة '+i);g.appendChild(b);
